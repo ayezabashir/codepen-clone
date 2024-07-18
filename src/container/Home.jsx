@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Logo } from "../assets";
 import { MdHome } from "react-icons/md";
+import { Routes, Route } from "react-router-dom";
+import { Projects, SignUp } from "../container";
 
 const Home = () => {
   const [isSideMenu, setIsSideMenu] = useState(false);
@@ -75,6 +77,13 @@ const Home = () => {
             </motion.div>
           )}
           {user && <div></div>}
+        </div>
+        {/* Bottom Section */}
+        <div className="w-full">
+          <Routes>
+            <Route path="/*" element={<Projects />} />
+            <Route path="/auth" element={<SignUp />} />
+          </Routes>
         </div>
       </div>
     </>

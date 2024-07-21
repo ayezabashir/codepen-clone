@@ -7,6 +7,8 @@ import { MdPassword } from "react-icons/md";
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [getEmailValidationStatus, setIsEmailValidationStatus] =
+    useState(false);
   return (
     <div className="w-full py-6">
       <img
@@ -25,6 +27,7 @@ const SignUp = () => {
             key="Email"
             setStateFunction={setEmail}
             Icon={FaEnvelope}
+            setIsEmailValidationStatus={setIsEmailValidationStatus}
           />
           {/* Password */}
           <UserAuthInput

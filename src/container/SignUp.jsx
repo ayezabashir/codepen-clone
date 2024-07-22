@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Logo } from "../assets";
 import { UserAuthInput } from "../components";
-import { FaEnvelope } from "react-icons/fa6";
+import { FaEnvelope, FaGithub } from "react-icons/fa6";
+import { FcGoogle } from "react-icons/fc";
 import { MdPassword } from "react-icons/md";
 import { motion } from "framer-motion";
 
@@ -21,7 +22,6 @@ const SignUp = () => {
       <div className="w-full flex flex-col items-center justify-center py-8 ">
         <p className="py-12 text-2xl text-primaryText">Join With Us! 🤩</p>
         <div className="px-8 w-full md:w-auto py-4 rounded-xl bg-secondary shadow-md flex flex-col justify-center items-center gap-8 ">
-          {/* Email */}
           <UserAuthInput
             label="Email"
             placeHolder="Email"
@@ -31,7 +31,6 @@ const SignUp = () => {
             Icon={FaEnvelope}
             setIsEmailValidationStatus={setIsEmailValidationStatus}
           />
-          {/* Password */}
           <UserAuthInput
             label="Password"
             placeHolder="Password"
@@ -40,7 +39,6 @@ const SignUp = () => {
             setStateFunction={setPassword}
             Icon={MdPassword}
           />
-          {/* Login Button */}
           {!isLogin ? (
             <motion.div
               whileTap={{ scale: 0.9 }}
@@ -77,6 +75,30 @@ const SignUp = () => {
               </span>
             </p>
           )}
+          <div className="flex items-center justify-center gap-12 ">
+            <div className="h-[1px] bg-[rgba(256,256,256,0.2)] rounded-md w-24"></div>
+            <p className="text-sm text-[rgba(256,256,256,0.2)]">OR</p>
+            <div className="h-[1px] bg-[rgba(256,256,256,0.2)] rounded-md w-24"></div>
+          </div>
+          <motion.div
+            whileTap={{ scale: 0.9 }}
+            className="flex items-center justify-center gap-3 bg-[rgba(256,256,256,0.2)] backdrop-blur-md w-full py-3 rounded-xl hover:bg-[rgba(256,256,256,0.4)] cursor-pointer"
+          >
+            <FcGoogle className="text-3xl" />
+            <p className="text-xl text-white">Sign in with Google</p>
+          </motion.div>
+          <div className="flex items-center justify-center gap-12 ">
+            <div className="h-[1px] bg-[rgba(256,256,256,0.2)] rounded-md w-24"></div>
+            <p className="text-sm text-[rgba(256,256,256,0.2)]">OR</p>
+            <div className="h-[1px] bg-[rgba(256,256,256,0.2)] rounded-md w-24"></div>
+          </div>
+          <motion.div
+            whileTap={{ scale: 0.9 }}
+            className="flex items-center justify-center gap-3 bg-[rgba(256,256,256,0.2)] backdrop-blur-md w-full py-3 rounded-xl hover:bg-[rgba(256,256,256,0.4)] cursor-pointer"
+          >
+            <FaGithub className="text-3xl" />
+            <p className="text-xl text-white">Sign in with Github</p>
+          </motion.div>
         </div>
       </div>
     </div>

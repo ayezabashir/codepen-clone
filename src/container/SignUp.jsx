@@ -4,9 +4,12 @@ import { UserAuthInput } from "../components";
 import { FaEnvelope, FaGithub } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { MdPassword } from "react-icons/md";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { signInWithGithub, signInWithGoogle } from "../utils/helpers";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../config/firebase.config";
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -14,6 +17,7 @@ const SignUp = () => {
   const [getEmailValidationStatus, setIsEmailValidationStatus] =
     useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const [alertError, setAlertError] = useState(false);
 
   const createNewUser = async () => {
     if (getEmailValidationStatus) {
@@ -24,6 +28,26 @@ const SignUp = () => {
           }
         })
         .catch((err) => console.log(err));
+    }
+  };
+
+  const loginWithEmailPassword = async () => {
+    if (getEmailValidationStatus) {
+      await signInWithEmailAndPassword(auth, email, password)
+        .then((userCred) => {
+          if (userCred) {
+            console.log(userCred);
+            setAlertError(false);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          setAlertError(true);
+
+          setInterval(() => {
+            setAlertError(false);
+          }, 4000);
+        });
     }
   };
 
@@ -54,6 +78,21 @@ const SignUp = () => {
             setStateFunction={setPassword}
             Icon={MdPassword}
           />
+
+          <AnimatePresence>
+            {alertError ? (
+              <motion.p
+                key={"AlertMessage"}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="text-red-500"
+              >
+                Invalid User or Password
+              </motion.p>
+            ) : null}
+          </AnimatePresence>
+
           {!isLogin ? (
             <motion.div
               onClick={createNewUser}
@@ -64,6 +103,7 @@ const SignUp = () => {
             </motion.div>
           ) : (
             <motion.div
+              onClick={loginWithEmailPassword}
               whileTap={{ scale: 0.9 }}
               className="flex items-center justify-center px-3 py-3 rounded-xl hover:bg-emerald-400 w-full cursor-pointer bg-emerald-500"
             >

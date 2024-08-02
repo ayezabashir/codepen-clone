@@ -6,13 +6,27 @@ import { FcGoogle } from "react-icons/fc";
 import { MdPassword } from "react-icons/md";
 import { motion } from "framer-motion";
 import { signInWithGithub, signInWithGoogle } from "../utils/helpers";
-
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../config/firebase.config";
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [getEmailValidationStatus, setIsEmailValidationStatus] =
     useState(false);
   const [isLogin, setIsLogin] = useState(false);
+
+  const createNewUser = async () => {
+    if (getEmailValidationStatus) {
+      await createUserWithEmailAndPassword(auth, email, password)
+        .then((userCred) => {
+          if (userCred) {
+            console.log(userCred);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
   return (
     <div className="w-full py-6">
       <img
@@ -42,6 +56,7 @@ const SignUp = () => {
           />
           {!isLogin ? (
             <motion.div
+              onClick={createNewUser}
               whileTap={{ scale: 0.9 }}
               className="flex items-center justify-center px-3 py-3 rounded-xl hover:bg-emerald-400 w-full cursor-pointer bg-emerald-500"
             >

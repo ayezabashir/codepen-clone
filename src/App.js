@@ -6,7 +6,7 @@ import { doc, setDoc } from 'firebase/firestore';
 import spinner from "./assets/img/loading.svg"
 
 const App = () => {
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((userCredentials) => {
@@ -18,6 +18,9 @@ const App = () => {
             } else {
                 navigate("/home/auth", { replace: true })
             }
+            setInterval(() => {
+                setIsLoading(false)
+            }, 2000)
         })
         return () => unsubscribe();
     }, [])

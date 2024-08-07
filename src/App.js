@@ -4,16 +4,21 @@ import { Home } from './container'
 import { auth, db } from './config/firebase.config';
 import { doc, setDoc } from 'firebase/firestore';
 import spinner from "./assets/img/loading.svg"
+import { useDispatch } from 'react-redux';
+import { SET_USER } from './context/actions/userActions';
 
 const App = () => {
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((userCredentials) => {
             if (userCredentials) {
                 console.log(userCredentials?.providerData[0]);
                 setDoc(doc(db, "users", userCredentials?.uid), userCredentials?.providerData[0]).then(() => {
                     // dispatch
+                    dispatch(SET_USER(userCredentials?.providerData[0]));
+                    navigate("/home/projects", { replace: true })
                 })
             } else {
                 navigate("/home/auth", { replace: true })

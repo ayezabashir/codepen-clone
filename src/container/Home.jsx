@@ -74,7 +74,7 @@ const Home = () => {
                 to={"/home/auth"}
                 className="bg-emerald-500 hover:bg-emerald-700 cursor-pointer text-white px-6 py-2 rounded-md"
               >
-                Sign Up
+                SignUp
               </Link>
             </motion.div>
           )}

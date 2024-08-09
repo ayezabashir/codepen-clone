@@ -7,10 +7,12 @@ import { Logo } from "../assets";
 import { MdHome } from "react-icons/md";
 import { Routes, Route } from "react-router-dom";
 import { Projects, SignUp } from "../container";
+import { useSelector } from "react-redux";
+import { UserProfileDetails } from "../components";
 
 const Home = () => {
   const [isSideMenu, setIsSideMenu] = useState(false);
-  const [user, setUser] = useState(null);
+  const user = useSelector((state) => state.user?.user);
   return (
     <>
       <div
@@ -76,7 +78,7 @@ const Home = () => {
               </Link>
             </motion.div>
           )}
-          {user && <div></div>}
+          {user && <UserProfileDetails />}
         </div>
         {/* Bottom Section */}
         <div className="w-full">

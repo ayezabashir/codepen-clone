@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
-import { Home } from './container'
+import { Home, NewProject } from './container'
 import { auth, db } from './config/firebase.config';
 import { doc, setDoc } from 'firebase/firestore';
 import spinner from "./assets/img/loading.svg"
@@ -40,6 +40,7 @@ const App = () => {
                 </div> : <div className='w-screen h-screen flex justify-start items-start overflow-hidden'>
                     <Routes>
                         <Route path='/home/*' element={<Home />} />
+                        <Route path='/newProject' element={<NewProject />} />
                         {/* by default it will navigate to home page */}
                         <Route path='*' element={<Navigate to={'/home'} />} />
                     </Routes>

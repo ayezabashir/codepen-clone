@@ -37,7 +37,12 @@ const UserProfileDetails = () => {
       </motion.div>
       <AnimatePresence>
         {isMenu && (
-          <motion.div className="bg-secondary absolute top-16 right-0 px-4 py-3 rounded-xl shadow-md z-10 flex flex-col items-start justify-start gap-4 min-w-[225px]">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className="bg-secondary absolute top-16 right-0 px-4 py-3 rounded-xl shadow-md z-10 flex flex-col items-start justify-start gap-4 min-w-[225px]"
+          >
             {Menus &&
               Menus.map((menu) => (
                 <Link

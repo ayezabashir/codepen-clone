@@ -1,8 +1,27 @@
 import { FaChevronDown, FaCss3, FaHtml5, FaJs } from "react-icons/fa";
 import { FcSettings } from "react-icons/fc";
 import SplitPane from "react-split-pane";
+import { useEffect, useRef } from "react";
+import { useCodeMirror } from "@uiw/react-codemirror";
+import { javascript } from "@codemirror/lang-javascript";
 
+const code = "console.log('hello world!');\n";
 const NewProject = () => {
+  const editor = useRef();
+  const { setContainer } = useCodeMirror({
+    container: editor.current,
+    extensions: [javascript()],
+    basicSetup: {
+      lineNumbers: true,
+    },
+    value: code,
+  });
+  useEffect(() => {
+    if (editor.current) {
+      setContainer(editor.current);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editor.current]);
   return (
     <>
       <div className="w-screen h-screen flex flex-col items-start justify-start overflow-hidden">
@@ -67,7 +86,9 @@ const NewProject = () => {
                       <FaChevronDown className="text-xl text-primaryText" />
                     </div>
                   </div>
-                  <div>Code Mirror</div>
+                  <div className="w-full px-2">
+                    <div ref={editor} />;
+                  </div>
                 </div>
               </SplitPane>
             </SplitPane>

@@ -41,7 +41,6 @@ const App = () => {
                     <Routes>
                         <Route path='/home/*' element={<Home />} />
                         <Route path='/newProject' element={<NewProject />} />
-                        {/* by default it will navigate to home page */}
                         <Route path='*' element={<Navigate to={'/home'} />} />
                     </Routes>
                 </div>

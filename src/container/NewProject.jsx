@@ -3,13 +3,32 @@ import { FcSettings } from "react-icons/fc";
 import SplitPane from "react-split-pane";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const NewProject = () => {
   const [html, setHtml] = useState("");
   const [css, setCss] = useState("");
   const [js, setJs] = useState("");
   const [output, setOutput] = useState("");
+
+  useEffect(() => {
+    updateOutput();
+  }, [html, css, js]);
+
+  const updateOutput = () => {
+    const combinedOutput = `
+    <html>
+      <head>
+        <style>${css}</style>
+      </head>
+      <body>
+        ${html}
+        <script>${js}</script>
+      </body>
+    </html>
+    `;
+    setOutput(combinedOutput);
+  };
 
   return (
     <>
@@ -111,7 +130,16 @@ const NewProject = () => {
             </SplitPane>
 
             {/* bottom result section */}
-            <div></div>
+            <div
+              className="bg-white"
+              style={{ overflow: "hidden", height: "100%" }}
+            >
+              <iframe
+                title="Result"
+                srcDoc={output}
+                style={{ border: "none", width: "100%", height: "100%" }}
+              />
+            </div>
           </SplitPane>
         </div>
       </div>

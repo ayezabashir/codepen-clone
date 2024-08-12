@@ -79,3 +79,25 @@ body {
 .pane3 {
   background: #d0d0d0;
 }
+
+.CodeMirror {
+  height: 340px !important;
+  color: #fff;
+  padding-top: 0 !important;
+}
+
+.CodeMirror-gutters {
+  background: #1d1322 !important;
+}
+
+.CodeMirror-scroll {
+  background: #1d1e22;
+}
+
+.SplitPane.horizontal {
+  top: 100px !important;
+}
+
+.co {
+  background: #131417 !important;
+}

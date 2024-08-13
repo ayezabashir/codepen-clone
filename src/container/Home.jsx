@@ -30,7 +30,7 @@ const Home = () => {
         </motion.div>
         <div className="overflow-hidden w-full flex flex-col gap-4">
           <Link to={"/home"}>
-            <img src={Logo} alt="logo" className="object-contain w-72 h-auto" />
+            <img src={Logo} alt="logo" className="object-contain w-64 h-auto" />
           </Link>
           <Link to={"/newProject"}>
             <div className="px-6 py-3 flex items-center justify-center rounded-xl border border-gray-400 cursor-pointer group hover:border-gray-200">

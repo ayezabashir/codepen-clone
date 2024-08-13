@@ -4,12 +4,18 @@ import SplitPane from "react-split-pane";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Logo } from "../assets";
+import { MdCheck, MdEdit } from "react-icons/md";
 
 const NewProject = () => {
   const [html, setHtml] = useState("");
   const [css, setCss] = useState("");
   const [js, setJs] = useState("");
   const [output, setOutput] = useState("");
+  const [isTitle, setIsTitle] = useState("");
+  const [title, setTitle] = useState("Untitled");
 
   useEffect(() => {
     updateOutput();
@@ -36,6 +42,72 @@ const NewProject = () => {
         {/* Alert section */}
 
         {/* header sections */}
+        <header className="w-full flex items-center justify-between px-12 py-4">
+          <div className="flex items-center justify-center gap-6">
+            <Link to={"/home"}>
+              <img
+                src={Logo}
+                alt="logo"
+                className="object-contain w-64 h-auto"
+              />
+            </Link>
+
+            <div className="flex flex-col items-start justify-start">
+              {/* title */}
+              <div className="flex items-center justify-center gap-3">
+                <AnimatePresence>
+                  {isTitle ? (
+                    <>
+                      <motion.input
+                        key={"TitleInput"}
+                        type="text"
+                        placeholder="Your Title"
+                        className="px-3 py-2 rounded-md bg-transparent text-primaryText text-base outline-none border-none"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <motion.p
+                        key={"titleLabel"}
+                        className="px-3 py-2 text-white text-lg"
+                      >
+                        {title}
+                      </motion.p>
+                    </>
+                  )}
+                </AnimatePresence>
+
+                <AnimatePresence>
+                  {isTitle ? (
+                    <>
+                      <motion.div
+                        key={"MdCheck"}
+                        whileTap={{ scale: 0.9 }}
+                        className="cursor-pointer"
+                        onClick={() => setIsTitle(false)}
+                      >
+                        <MdCheck className="text-2xl text-emerald-500" />
+                      </motion.div>
+                    </>
+                  ) : (
+                    <>
+                      <motion.div
+                        key={"MdEdit"}
+                        whileTap={{ scale: 0.9 }}
+                        className="cursor-pointer"
+                        onClick={() => setIsTitle(true)}
+                      >
+                        <MdEdit className="text-2xl text-primaryText" />
+                      </motion.div>
+                    </>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+          </div>
+        </header>
 
         {/* coding sections */}
         <div>

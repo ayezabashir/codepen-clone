@@ -8,6 +8,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Logo } from "../assets";
 import { MdCheck, MdEdit } from "react-icons/md";
+import { useSelector } from "react-redux";
+import UserProfileDetails from "../components/UserProfileDetails";
 
 const NewProject = () => {
   const [html, setHtml] = useState("");
@@ -16,6 +18,7 @@ const NewProject = () => {
   const [output, setOutput] = useState("");
   const [isTitle, setIsTitle] = useState("");
   const [title, setTitle] = useState("Untitled");
+  const user = useSelector((state) => state.user.user);
 
   useEffect(() => {
     updateOutput();
@@ -105,8 +108,35 @@ const NewProject = () => {
                   )}
                 </AnimatePresence>
               </div>
+
+              {/* User follow */}
+              <div className="flex items-center justify-center px-3 mt-2 gap-2">
+                <p className="text-primaryText text-sm">
+                  {user?.displayName
+                    ? user?.displayName
+                    : `${user?.email.split("@")[0]}`}
+                </p>
+                <motion.p
+                  whileTap={{ scale: 0.9 }}
+                  className="text[10px] bg-emerald-500 rounded-sm px-2 py-[1px] text-primary font-semibold cursor-pointer "
+                >
+                  + Follow
+                </motion.p>
+              </div>
             </div>
           </div>
+          {/* User section */}
+          {user && (
+            <div className="flex items-center justify-center gap-4">
+              <motion.button
+                whileTap={{ scale: 0.9 }}
+                className="px-6 py-4 bg-primaryText cursor-pointer text-base text-primary font-semibold rounded-md"
+              >
+                Save
+              </motion.button>
+              <UserProfileDetails />
+            </div>
+          )}
         </header>
 
         {/* coding sections */}

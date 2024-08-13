@@ -21,7 +21,7 @@ const NewProject = () => {
   const [output, setOutput] = useState("");
   const [isTitle, setIsTitle] = useState("");
   const [title, setTitle] = useState("Untitled");
-  const [alert, setAlert] = useState(true);
+  const [alert, setAlert] = useState(false);
   const user = useSelector((state) => state.user.user);
 
   useEffect(() => {
@@ -56,8 +56,14 @@ const NewProject = () => {
     };
 
     await setDoc(doc(db, "Projects", id), _doc)
-      .then((res) => {})
+      .then((res) => {
+        setAlert(true);
+      })
       .catch((err) => console.log(err));
+
+    setInterval(() => {
+      setAlert(false);
+    }, 2000);
   };
 
   return (

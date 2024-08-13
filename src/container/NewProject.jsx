@@ -10,6 +10,9 @@ import { Logo } from "../assets";
 import { MdCheck, MdEdit } from "react-icons/md";
 import { useSelector } from "react-redux";
 import UserProfileDetails from "../components/UserProfileDetails";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../config/firebase.config";
+import Alert from "../components/Alert";
 
 const NewProject = () => {
   const [html, setHtml] = useState("");
@@ -18,6 +21,7 @@ const NewProject = () => {
   const [output, setOutput] = useState("");
   const [isTitle, setIsTitle] = useState("");
   const [title, setTitle] = useState("Untitled");
+  const [alert, setAlert] = useState(true);
   const user = useSelector((state) => state.user.user);
 
   useEffect(() => {
@@ -39,10 +43,30 @@ const NewProject = () => {
     setOutput(combinedOutput);
   };
 
+  const saveCodePen = async () => {
+    const id = `${Date.now()}`;
+    const _doc = {
+      id: id,
+      title: title,
+      html: html,
+      css: css,
+      js: js,
+      output: output,
+      user: user,
+    };
+
+    await setDoc(doc(db, "Projects", id), _doc)
+      .then((res) => {})
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <div className="w-screen h-screen flex flex-col items-start justify-start overflow-hidden">
         {/* Alert section */}
+        <AnimatePresence>
+          {alert && <Alert status={"Success"} alertMsg={"Project Saved..."} />}
+        </AnimatePresence>
 
         {/* header sections */}
         <header className="w-full flex items-center justify-between px-12 py-4">
@@ -129,6 +153,7 @@ const NewProject = () => {
           {user && (
             <div className="flex items-center justify-center gap-4">
               <motion.button
+                onClick={saveCodePen}
                 whileTap={{ scale: 0.9 }}
                 className="px-6 py-4 bg-primaryText cursor-pointer text-base text-primary font-semibold rounded-md"
               >

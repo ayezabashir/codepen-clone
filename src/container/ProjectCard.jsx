@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { MdBookmark } from "react-icons/md";
 
 const ProjectCard = ({ project, index }) => {
   return (
@@ -43,6 +44,10 @@ const ProjectCard = ({ project, index }) => {
               : `${project?.user?.email.split("@"[0])}`}
           </p>
         </div>
+        {/* Collection */}
+        <motion.div className="cursor-pointer ml-auto">
+          <MdBookmark className="text-primaryText text-3xl" />
+        </motion.div>
       </div>
     </motion.div>
   );

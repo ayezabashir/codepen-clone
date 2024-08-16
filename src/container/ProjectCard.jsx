@@ -6,6 +6,10 @@ const ProjectCard = ({ project, index }) => {
   return (
     <motion.div
       key={index}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.5 }}
       className="w-full cursor-pointer md:w-[450px] h-[375px] bg-secondary rounded-md p-4 flex flex-col items-center justify-center gap-4 "
     >
       <div

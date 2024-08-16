@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Logo } from "../assets";
 import { UserAuthInput } from "../components";
-import { FaEnvelope, FaGithub } from "react-icons/fa6";
-import { FcGoogle } from "react-icons/fc";
+import { FaEnvelope } from "react-icons/fa6";
 import { MdPassword } from "react-icons/md";
 import { AnimatePresence, motion } from "framer-motion";
-import { signInWithGithub, signInWithGoogle } from "../utils/helpers";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -131,32 +129,6 @@ const SignUp = () => {
               </span>
             </p>
           )}
-          <div className="flex items-center justify-center gap-12 ">
-            <div className="h-[1px] bg-[rgba(256,256,256,0.2)] rounded-md w-24"></div>
-            <p className="text-sm text-[rgba(256,256,256,0.2)]">OR</p>
-            <div className="h-[1px] bg-[rgba(256,256,256,0.2)] rounded-md w-24"></div>
-          </div>
-          <motion.div
-            onClick={signInWithGoogle}
-            whileTap={{ scale: 0.9 }}
-            className="flex items-center justify-center gap-3 bg-[rgba(256,256,256,0.2)] backdrop-blur-md w-full py-3 rounded-xl hover:bg-[rgba(256,256,256,0.4)] cursor-pointer"
-          >
-            <FcGoogle className="text-3xl" />
-            <p className="text-xl text-white">Sign in with Google</p>
-          </motion.div>
-          <div className="flex items-center justify-center gap-12 ">
-            <div className="h-[1px] bg-[rgba(256,256,256,0.2)] rounded-md w-24"></div>
-            <p className="text-sm text-[rgba(256,256,256,0.2)]">OR</p>
-            <div className="h-[1px] bg-[rgba(256,256,256,0.2)] rounded-md w-24"></div>
-          </div>
-          <motion.div
-            onClick={signInWithGithub}
-            whileTap={{ scale: 0.9 }}
-            className="flex items-center justify-center gap-3 bg-[rgba(256,256,256,0.2)] backdrop-blur-md w-full py-3 rounded-xl hover:bg-[rgba(256,256,256,0.4)] cursor-pointer"
-          >
-            <FaGithub className="text-3xl" />
-            <p className="text-xl text-white">Sign in with Github</p>
-          </motion.div>
         </div>
       </div>
     </div>

@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { MdBookmark } from "react-icons/md";
 
 const ProjectCard = ({ project, index }) => {
   return (
@@ -10,7 +9,7 @@ const ProjectCard = ({ project, index }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, delay: index * 0.5 }}
-      className="w-full cursor-pointer md:w-[400px] h-[375px] bg-secondary rounded-md p-4 flex flex-col items-center justify-center gap-4 "
+      className="w-full cursor-pointer md:w-[450px] h-[375px] bg-secondary rounded-md p-4 flex flex-col items-center justify-center gap-4 "
     >
       <div
         className="bg-primary w-full h-full rounded-md overflow-hidden"
@@ -42,16 +41,12 @@ const ProjectCard = ({ project, index }) => {
         {/* name */}
         <div>
           <p className="text-white text-lg capitalize">{project?.title}</p>
-          <p className="text-primaryText text-sm capitalize">
+          <p className="text-primaryText text-sm">
             {project?.user?.displayName
               ? project?.user?.displayName
-              : `${project?.user?.email.split("@"[0])}`}
+              : `${project?.user?.email.split("@")[0]}`}
           </p>
         </div>
-        {/* Collection */}
-        <motion.div className="cursor-pointer ml-auto">
-          <MdBookmark className="text-primaryText text-3xl" />
-        </motion.div>
       </div>
     </motion.div>
   );
